@@ -24,3 +24,12 @@ export const validateMyUserUpdateRequest = [
     body("country").isString().notEmpty().withMessage("Country must be a string."),
     handleValidationErrors
 ];
+
+// IngredientRoute - create
+export const validateIngredientRequest = [
+    body("name").notEmpty().withMessage("Ingredient name is required"),
+    body("category").notEmpty().withMessage("Category (BASE,MIXIN,PROTEIN,TOPPING, or SAUCE) is required"),
+    body("price").isFloat({ min: 0 }).withMessage("Price be a positive number"),
+    body("calories").isInt({ min: 0 }).withMessage("Calories must be a positive whole number"),
+    handleValidationErrors,
+  ];

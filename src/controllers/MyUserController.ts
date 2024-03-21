@@ -53,13 +53,13 @@ const update = async (req: Request, res: Response) => {
 
 const get = async (req: Request, res: Response) => {
     try {
-        const user = await User.findOne({_id: req.userId});
+        const myUser = await User.findOne({_id: req.userId});
 
-        if (!user) {
+        if (!myUser) {
             return res.status(404).json({message: "User not found"});
         }
 
-        res.json(user);
+        res.json(myUser);
     } catch (error) {
         console.log(error);
         return res.status(500).json({message: "Error getting user"});
