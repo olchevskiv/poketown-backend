@@ -16,7 +16,7 @@ const upload = multer({
 
 
 router.post("/", upload.single("imageFile"), MenuItemController.create);
-router.get("/", MenuItemController.getMenuItems);
-router.get("/:menuItemID", param("menuItemID").isString().trim().notEmpty().withMessage("MenuItemID paramenter must be valid"), MenuItemController.get);
+router.get("/", MenuItemController.getAll);
+router.get("/:menuItemID", param("menuItemID").isString().trim().notEmpty().withMessage("MenuItemID paramenter must be valid"), MenuItemController.getByID);
 
 export default router;

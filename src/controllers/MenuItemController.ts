@@ -5,7 +5,7 @@ import cloudinary from "cloudinary";
 import mongoose from "mongoose";
 
 
-const get = async (req: Request, res: Response) => {
+const getByID = async (req: Request, res: Response) => {
     try {
         const menuItemID = req.params.menuItemID;
 
@@ -25,7 +25,7 @@ const get = async (req: Request, res: Response) => {
     }
 }; 
 
-const getMenuItems = async (req: Request, res: Response) => {
+const getAll = async (req: Request, res: Response) => {
     try {
         const menuItems = await MenuItem.find();
 
@@ -91,6 +91,6 @@ const create = async (req: Request, res: Response) => {
 
 export default {
     create,
-    get,
-    getMenuItems
+    getByID,
+    getAll
 };
