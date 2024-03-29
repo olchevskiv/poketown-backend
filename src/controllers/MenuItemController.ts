@@ -47,7 +47,7 @@ const uploadImage = async (file: Express.Multer.File) => {
 
 const create = async (req: Request, res: Response) => {
     try {
-        const { name, category, description, price } = req.body;
+        const { name, category, description, price, baseCalories } = req.body;
 
         const existingMenuItem = await MenuItem.findOne({
             'name': name,
@@ -73,6 +73,7 @@ const create = async (req: Request, res: Response) => {
             name: name,
             category: category,
             price: price,
+            baseCalories: baseCalories,
             description: description,
             ingredients: ingredients,
             image_url: imageUrl,

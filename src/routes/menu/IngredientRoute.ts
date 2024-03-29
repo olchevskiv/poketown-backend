@@ -15,7 +15,7 @@ const upload = multer({
 });
 
 
-router.post("/", upload.single("imageFile"), validateIngredientRequest, IngredientController.create);
+router.post("/",validateJWT,parseJWT,upload.single("imageFile"), validateIngredientRequest, IngredientController.create);
 router.get("/", IngredientController.getIngredients);
 
 export default router;
