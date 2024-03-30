@@ -23,6 +23,7 @@ type CartItem = {
 }
 
 type CheckoutSessionRequest = {
+    pickUpTime: Date,
     cartItems: CartItem[],
     restaurantId: string,
 
@@ -53,6 +54,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
                     restaurant: restaurantId,
                     user: req.userId,
                     status: "placed",
+                    pickUpTime: CheckoutSessionRequest.pickUpTime,
                     cartItems: CheckoutSessionRequest.cartItems,
                     createdAt: new Date()
                     
@@ -152,7 +154,7 @@ const createStripeSession = (stripeLineItems: Stripe.Checkout.SessionCreateParam
         automatic_tax: {
             enabled: true
         },
-        success_url: `${FRONTEND_URL}/order/status?success=true`,
+        success_url: `${FRONTEND_URL}/order/${orderId}`,
         cancel_url: `${FRONTEND_URL}/checkout?canceled=true`,
     });
 

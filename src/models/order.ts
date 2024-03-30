@@ -14,6 +14,7 @@ const orderSchema = new mongoose.Schema({
       ingredients: [{type: mongoose.Schema.Types.ObjectId, ref: "Ingredient"}]
     },
   ],
+  pickUpTime: { type: Date },
   totalAmount: Number,
   status: {
     type: String,

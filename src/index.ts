@@ -4,11 +4,13 @@ import "dotenv/config";
 
 import mongoose from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
+
 import myUserRoute from "./routes/MyUserRoute";
 import restaurantRoute from "./routes/RestaurantRoute";
 import menuItemRoute from "./routes/menu/MenuItemRoute";
 import ingredientRoute from "./routes/menu/IngredientRoute";
 import orderRoute from "./routes/OrderRoute";
+import myOrderRoute from "./routes/MyOrderRoute";
 
 mongoose.connect(process.env.MONGODB_CONNECT_STRING as string).then(()=> console.log('Connected to database'));
 
@@ -36,6 +38,7 @@ app.use("/api/restaurant", restaurantRoute);
 app.use("/api/menu-item", menuItemRoute);
 app.use("/api/ingredient", ingredientRoute);
 app.use("/api/order", orderRoute);
+app.use("/api/my/order", myOrderRoute);
 
 app.listen(7000, ()=>{
     console.log('Server started on localhost:7000');
