@@ -25,7 +25,7 @@ const app = express();
 
 app.use(cors());
 
-app.use("/api/order/checkout/webook", express.raw({ type : "*/*" }));
+app.use("/api/order/checkout/webook", express.raw({ type: 'application/json' }));
 
 app.use(express.json()); // all endpoints after parse as json
 
