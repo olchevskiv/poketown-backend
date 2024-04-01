@@ -154,7 +154,7 @@ const createStripeSession = (stripeLineItems: Stripe.Checkout.SessionCreateParam
         automatic_tax: {
             enabled: true
         },
-        success_url: `${FRONTEND_URL}/order/${orderId}`,
+        success_url: `${FRONTEND_URL}/order/${orderId}?success=true`,
         cancel_url: `${FRONTEND_URL}/checkout?canceled=true`,
     });
 

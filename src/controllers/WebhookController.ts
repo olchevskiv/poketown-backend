@@ -6,7 +6,6 @@ const STRIPE = new Stripe(process.env.STRIPE_API_KEY as string);
 const FRONTEND_URL = process.env.FRONTEND_URL as string;
 const STRIPE_ENDPOINT_SECRET = process.env.STRIPE_WEBHOOK_SECRET as string;
 
-
 // Recieve events from Stripe checkout
 const stripeWebhookHandler = async (req: Request, res: Response) => {
     let event;
@@ -14,7 +13,7 @@ const stripeWebhookHandler = async (req: Request, res: Response) => {
         // validate webhook comes from stripe
         const sig = req.headers["stripe-signature"];
         event = STRIPE.webhooks.constructEvent(
-            JSON.stringify(req.body),
+            req.body,
             sig as string,
             STRIPE_ENDPOINT_SECRET
         );

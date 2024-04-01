@@ -17,8 +17,11 @@ const getByID = async (req: Request, res: Response) => {
 
 const getAll = async (req: Request, res: Response) => {
     try {
+      const sortOption = "createdAt";
+
       const orders = await Order.find({ user: req.userId,  status: { "$in" : ["paid", "inProgress","readyForPickup","pickedUp"]} })
-        .populate("restaurant");
+        .populate("restaurant")
+        .sort({ [sortOption]: -1 });
   
       res.json(orders);
     } catch (error) {
@@ -30,11 +33,11 @@ const getAll = async (req: Request, res: Response) => {
 
 const getActive = async (req: Request, res: Response) => {
   try {
-    const sortOption = "lastCreated";
+    const sortOption = "createdAt";
 
     const orders = await Order.find({ user: req.userId, status: { "$in" : ["placed", "paid", "inProgress"]} })
       .populate("restaurant")
-      .sort({ [sortOption]: 1 });
+      .sort({ [sortOption]: -1 });
 
     res.json(orders);
   } catch (error) {

@@ -25,7 +25,7 @@ const app = express();
 
 app.use(cors());
 
-app.use("/api/webook", express.raw({ type: 'application/json' }), webhookRoute);
+app.use("/api/webhook/stripe", express.raw( { type: "*/*"} ));
 
 app.use(express.json()); // all endpoints after parse as json
 
@@ -39,6 +39,7 @@ app.use("/api/menu-item", menuItemRoute);
 app.use("/api/ingredient", ingredientRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/my/order", myOrderRoute);
+app.use("/api/webhook", webhookRoute);
 
 app.listen(7000, ()=>{
     console.log('Server started on localhost:7000');
