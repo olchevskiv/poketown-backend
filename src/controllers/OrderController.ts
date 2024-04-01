@@ -20,7 +20,11 @@ const stripeWebhookHandler = async (req: Request, res: Response) => {
 
         // validate webhook comes from stripe
         const sig = req.headers["stripe-signature"];
-        event = STRIPE.webhooks.constructEvent(req.body,sig as string,STRIPE_ENDPOINT_SECRET);
+        event = STRIPE.webhooks.constructEvent(
+            JSON.stringify(req.body),
+            sig as string,
+            STRIPE_ENDPOINT_SECRET
+        );
 
       } catch (error: any) {
         console.log(error);
