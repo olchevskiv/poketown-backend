@@ -11,6 +11,7 @@ import menuItemRoute from "./routes/menu/MenuItemRoute";
 import ingredientRoute from "./routes/menu/IngredientRoute";
 import orderRoute from "./routes/OrderRoute";
 import myOrderRoute from "./routes/MyOrderRoute";
+import webhookRoute from "./routes/WebhookRoute";
 
 mongoose.connect(process.env.MONGODB_CONNECT_STRING as string).then(()=> console.log('Connected to database'));
 
@@ -24,7 +25,7 @@ const app = express();
 
 app.use(cors());
 
-app.use("/api/order/checkout/webook", express.raw({ type: 'application/json' }));
+app.use("/api/webook", express.raw({ type: 'application/json' }), webhookRoute);
 
 app.use(express.json()); // all endpoints after parse as json
 
