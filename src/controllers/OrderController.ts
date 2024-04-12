@@ -12,7 +12,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL as string;
 
 
 type CartItem = {
-    _id: string,
+    menuItemId: string,
     isCustom: boolean,
     name: string,
     price: number,
@@ -111,11 +111,11 @@ const createStripeLineItems = (checkoutSessionRequest: CheckoutSessionRequest, m
             lineItemPrice = ingredientTotalPrice * 100; // convert to cents
         } else { // regular menu items use stored price from database
             let menuItem = menuItems.find(
-                (item) => item._id.toString() === cartItem._id.toString()
+                (item) => item._id.toString() === cartItem.menuItemId.toString()
             );
 
             if(!menuItem){
-                throw new Error(`Menu item not found: ${cartItem._id}`)
+                throw new Error(`Menu item not found: ${cartItem.menuItemId}`)
             }
 
             lineItemPrice = menuItem.price * 100; // convert to cents
