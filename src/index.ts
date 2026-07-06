@@ -23,10 +23,13 @@ cloudinary.config({
 
 const app = express();
 
+const allowedOrigin = process.env.FRONTEND_URL?.replace(/\/$/, "");
+
 app.use(cors({
     origin: function(origin, callback) {
     if (!origin) return callback(null, true);
-    if (process.env.FRONTEND_URL !== origin) {
+    if (allowedOrigin !== origin.replace(/\/$/, "")) {
+        console.error(`CORS blocked request from origin: "${origin}" (expected "${allowedOrigin}")`);
         var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), false);
     }
