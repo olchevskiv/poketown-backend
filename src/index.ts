@@ -23,7 +23,17 @@ cloudinary.config({
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (process.env.FRONTEND_URL !== origin) {
+        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+    },
+    credentials: true // Required if you are sending cookies or auth headers
+}));
 
 app.use("/api/webhook/stripe", express.raw( { type: "*/*"} ));
 
